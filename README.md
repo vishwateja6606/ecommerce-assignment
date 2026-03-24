@@ -7,47 +7,52 @@ A full-stack e-commerce web application built with **React** (frontend) and **Sp
 ## 📋 Features
 
 ### Authentication & Authorization
-- **Local Auth** – Register and log in with username/password (JWT issued on login)
-- **OAuth2 SSO** – Single Sign-On via Google, GitHub, and Facebook (OpenID Connect)
-- **RBAC** – Two roles: `ADMIN` (full CRUD) and `USER` (read-only)
-- **JWT** – Stateless token-based sessions; token stored in `localStorage`
+
+* **Local Auth** – Register and log in with username/password (JWT issued on login)
+* **OAuth2 SSO** – Single Sign-On via Google, GitHub, and Facebook (OpenID Connect)
+* **RBAC** – Two roles: `ADMIN` (full CRUD) and `USER` (read-only)
+* **JWT** – Stateless token-based sessions; token stored in `localStorage`
 
 ### Product Dashboard
-- Amazon/Flipkart-style product grid with images, categories, prices, and stock
-- Search by keyword and filter by category
-- **ADMIN**: Add, Edit, Delete products via modal form
-- **USER**: Browse and view products only
+
+* Amazon/Flipkart-style product grid with images, categories, prices, and stock
+* Search by keyword and filter by category
+* **ADMIN**: Add, Edit, Delete products via modal form
+* **USER**: Browse and view products only
 
 ### User Profile Management
-- View and update personal info (name, phone, avatar)
-- Change password (local accounts)
-- Account settings tab with role/provider info
+
+* View and update personal info (name, phone, avatar)
+* Change password (local accounts)
+* Account settings tab with role/provider info
 
 ### Admin Panel (`/admin`)
-- Stats overview (total products, stock, avg price, users)
-- Full products CRUD table
-- User management table (view all users and roles)
+
+* Stats overview (total products, stock, avg price, users)
+* Full products CRUD table
+* User management table (view all users and roles)
 
 ---
 
 ## 🏗 Tech Stack
 
-| Layer     | Technology                                      |
-|-----------|-------------------------------------------------|
-| Frontend  | React 18, React Router v6, Axios, React-Toastify|
-| Backend   | Spring Boot 3.2, Spring Security 6, Spring Data JPA |
-| Auth      | JWT (jjwt), OAuth2 Client (Spring Security)     |
-| Database  | MySQL|
-| Build     | Maven (backend), Create React App (frontend)    |
+| Layer    | Technology                                          |
+| -------- | --------------------------------------------------- |
+| Frontend | React 18, React Router v6, Axios, React-Toastify    |
+| Backend  | Spring Boot 3.2, Spring Security 6, Spring Data JPA |
+| Auth     | JWT (jjwt), OAuth2 Client (Spring Security)         |
+| Database | MySQL                                               |
+| Build    | Maven (backend), Create React App (frontend)        |
 
 ---
 
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Java 17+
-- Node.js 18+
-- Maven 3.8+
+
+* Java 17+
+* Node.js 18+
+* Maven 3.8+
 
 ---
 
@@ -62,19 +67,26 @@ cd ecommerce-app
 
 ### 2. Start the Backend
 
+```bash
 cd backend
 mvn spring-boot:run
+```
 
 Backend runs on:
 
+```
 http://localhost:8081
+```
 
-Create database:
+### Create database
 
+```sql
 CREATE DATABASE ecommerce;
+```
 
-Update application.yml:
+### Update `application.yml`
 
+```yaml
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/ecommerce
@@ -85,12 +97,16 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-#### Default seeded accounts
+```
 
-| Username | Password   | Role       |
-|----------|------------|------------|
-| `admin`  | `Admin@123`| ROLE_ADMIN |
-| `user`   | `User@123` | ROLE_USER  |
+---
+
+### 🔑 Default Accounts
+
+| Username | Password  | Role       |
+| -------- | --------- | ---------- |
+| admin    | Admin@123 | ROLE_ADMIN |
+| user     | User@123  | ROLE_USER  |
 
 ---
 
@@ -103,112 +119,70 @@ npm install
 npm start
 ```
 
-The frontend starts on **http://localhost:3000**.
+Frontend runs on:
+
+```
+http://localhost:3000
+```
 
 ---
 
 ## 🔐 OAuth2 SSO Setup
 
-To enable SSO, register OAuth2 apps with each provider and add credentials:
+### Google Setup
 
-### Google
-1. Go to [Google Cloud Console](https://console.cloud.google.com/) → APIs & Services → Credentials
-2. Create an OAuth 2.0 Client ID (Web Application)
-3. Add Authorized redirect URI: `http://localhost:8080/login/oauth2/code/google`
+1. Go to https://console.cloud.google.com/
+2. Create OAuth 2.0 Client ID
+3. Add Redirect URI:
 
-Then set environment variables (or edit `application.yml`):
+```
+http://localhost:8081/login/oauth2/code/google
+```
+
+### Set Environment Variables
 
 ```bash
 export GOOGLE_CLIENT_ID=your-google-client-id
 export GOOGLE_CLIENT_SECRET=your-google-client-secret
+```
+
 ---
 
 ## 📡 REST API Reference
 
-### Auth
-| Method | Endpoint              | Access  | Description              |
-|--------|-----------------------|---------|--------------------------|
-| POST   | `/api/auth/register`  | Public  | Register new user        |
-| POST   | `/api/auth/login`     | Public  | Login, returns JWT       |
-| GET    | `/api/auth/me`        | Auth    | Current user info        |
+### Auth APIs
 
-### Products
-| Method | Endpoint                        | Access | Description          |
-|--------|---------------------------------|--------|----------------------|
-| GET    | `/api/products`                 | Public | List all products    |
-| GET    | `/api/products/{id}`            | Public | Get product by ID    |
-| GET    | `/api/products/search?keyword=` | Public | Search products      |
-| GET    | `/api/products/category/{cat}`  | Public | Filter by category   |
-| POST   | `/api/products`                 | ADMIN  | Create product       |
-| PUT    | `/api/products/{id}`            | ADMIN  | Update product       |
-| DELETE | `/api/products/{id}`            | ADMIN  | Delete product       |
-
-### Users
-| Method | Endpoint                     | Access | Description           |
-|--------|------------------------------|--------|-----------------------|
-| GET    | `/api/users/profile`         | Auth   | Get own profile       |
-| PUT    | `/api/users/profile`         | Auth   | Update own profile    |
-| PUT    | `/api/users/change-password` | Auth   | Change password       |
-| GET    | `/api/users`                 | ADMIN  | List all users        |
-| GET    | `/api/users/{id}`            | ADMIN  | Get user by ID        |
+| Method | Endpoint           | Access | Description   |
+| ------ | ------------------ | ------ | ------------- |
+| POST   | /api/auth/register | Public | Register user |
+| POST   | /api/auth/login    | Public | Login (JWT)   |
+| GET    | /api/auth/me       | Auth   | Current user  |
 
 ---
 
-## 📁 Project Structure
+### Product APIs
 
-```
-ecommerce-app/
-├── backend/
-│   ├── pom.xml
-│   └── src/main/
-│       ├── java/com/ecommerce/
-│       │   ├── EcommerceApplication.java
-│       │   ├── config/
-│       │   │   ├── SecurityConfig.java       # CORS, JWT, OAuth2, RBAC
-│       │   │   └── DataInitializer.java      # Seeds users & products
-│       │   ├── controller/
-│       │   │   ├── AuthController.java       # Register, login, /me
-│       │   │   ├── ProductController.java    # Product CRUD
-│       │   │   └── UserController.java       # Profile management
-│       │   ├── dto/                          # Request/response DTOs
-│       │   ├── exception/                    # GlobalExceptionHandler
-│       │   ├── model/
-│       │   │   ├── User.java
-│       │   │   ├── Product.java
-│       │   │   └── Role.java (enum)
-│       │   ├── repository/
-│       │   │   ├── UserRepository.java
-│       │   │   └── ProductRepository.java
-│       │   └── security/
-│       │       ├── JwtTokenProvider.java     # JWT generation & validation
-│       │       ├── JwtAuthFilter.java        # Request filter
-│       │       ├── UserPrincipal.java        # UserDetails wrapper
-│       │       ├── CustomUserDetailsService.java
-│       │       └── OAuth2SuccessHandler.java # SSO → JWT redirect
-│       └── resources/
-│           └── application.yml
-│
-└── frontend/
-    ├── package.json
-    ├── public/index.html
-    └── src/
-        ├── App.js                            # Routes
-        ├── index.js
-        ├── api/index.js                      # Axios + API helpers
-        ├── context/AuthContext.js            # Auth state & JWT storage
-        ├── components/
-        │   ├── Navbar.js
-        │   ├── ProtectedRoute.js
-        │   └── ProductModal.js               # Create/Edit product form
-        ├── pages/
-        │   ├── LoginPage.js                  # Login + SSO buttons
-        │   ├── RegisterPage.js
-        │   ├── DashboardPage.js              # Product grid
-        │   ├── ProfilePage.js                # User profile + password
-        │   ├── AdminPage.js                  # Admin CRUD panel
-        │   └── OAuth2RedirectPage.js         # OAuth2 token handler
-        └── styles/global.css
-```
+| Method | Endpoint                      | Access | Description   |
+| ------ | ----------------------------- | ------ | ------------- |
+| GET    | /api/products                 | Public | List products |
+| GET    | /api/products/{id}            | Public | Get product   |
+| GET    | /api/products/search?keyword= | Public | Search        |
+| GET    | /api/products/category/{cat}  | Public | Filter        |
+| POST   | /api/products                 | ADMIN  | Create        |
+| PUT    | /api/products/{id}            | ADMIN  | Update        |
+| DELETE | /api/products/{id}            | ADMIN  | Delete        |
+
+---
+
+### User APIs
+
+| Method | Endpoint                   | Access | Description     |
+| ------ | -------------------------- | ------ | --------------- |
+| GET    | /api/users/profile         | Auth   | Get profile     |
+| PUT    | /api/users/profile         | Auth   | Update profile  |
+| PUT    | /api/users/change-password | Auth   | Change password |
+| GET    | /api/users                 | ADMIN  | List users      |
+| GET    | /api/users/{id}            | ADMIN  | Get user        |
 
 ---
 
@@ -221,9 +195,9 @@ Browser
   │                                        │
   │  ◄── JWT ──────────────────────────────┘
   │
-  ├─ /oauth2/authorize/google ─────► Spring OAuth2 → Google
+  ├─ /oauth2/authorization/google ─► Spring OAuth2 → Google
   │                                        │
-  │  ◄── redirect with ?token=JWT ─── OAuth2SuccessHandler
+  │  ◄── redirect with token ────── OAuth2SuccessHandler
   │
   └─ /api/products (Bearer JWT) ──► JwtAuthFilter
                                          │
@@ -238,22 +212,21 @@ Browser
 
 ## 🌐 Deployment
 
-### Backend (JAR)
+### Backend
+
 ```bash
 cd backend
 mvn clean package -DskipTests
-java -jar target/ecommerce-backend-1.0.0.jar \
-  --spring.datasource.url=jdbc:postgresql://localhost/ecommercedb \
-  --spring.datasource.username=postgres \
-  --spring.datasource.password=secret \
-  --app.jwt.secret=YOUR_256_BIT_SECRET
+java -jar target/ecommerce-backend.jar
 ```
 
-### Frontend (Static)
+---
+
+### Frontend
+
 ```bash
 cd frontend
 npm run build
-# Serve the `build/` folder with Nginx, Vercel, Netlify, etc.
 ```
 
 ---
@@ -261,11 +234,3 @@ npm run build
 ## 📄 License
 
 MIT – free to use and modify.
-# e-commerce
-# e-commerce
-# e-commerce
-# e-commerce
-# e-commerce
-# e-commerce
-# e-commerce
-# e-commerce
