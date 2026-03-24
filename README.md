@@ -121,11 +121,7 @@ Then set environment variables (or edit `application.yml`):
 ```bash
 export GOOGLE_CLIENT_ID=your-google-client-id
 export GOOGLE_CLIENT_SECRET=your-google-client-secret
-export GITHUB_CLIENT_ID=your-github-client-id
-export GITHUB_CLIENT_SECRET=your-github-client-secret
-export FACEBOOK_CLIENT_ID=your-facebook-client-id
-export FACEBOOK_CLIENT_SECRET=your-facebook-client-secret
-```
+
 
 ---
 
