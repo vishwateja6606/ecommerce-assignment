@@ -37,7 +37,7 @@ A full-stack e-commerce web application built with **React** (frontend) and **Sp
 | Frontend  | React 18, React Router v6, Axios, React-Toastify|
 | Backend   | Spring Boot 3.2, Spring Security 6, Spring Data JPA |
 | Auth      | JWT (jjwt), OAuth2 Client (Spring Security)     |
-| Database  | H2 (in-memory, dev) – swap to PostgreSQL in prod|
+| Database  | MySQL|
 | Build     | Maven (backend), Create React App (frontend)    |
 
 ---
