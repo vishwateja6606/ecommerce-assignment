@@ -31,10 +31,10 @@ app:
     expiration-ms: 86400000
 
   cors:
-    allowed-origins: https://ecommerce-assignment-pied-eta.vercel.app
+    allowed-origins: https://ecommerce-assignment-2k2cnjmxt-vishwas-projects-11cada93.vercel.app
 
   oauth2:
-    authorized-redirect-uris: https://ecommerce-assignment-pied-eta.vercel.app/oauth2/redirect
+    authorized-redirect-uris: https://ecommerce-assignment-2k2cnjmxt-vishwas-projects-11cada93.vercel.app/oauth2/redirect
 
 logging:
   level:
