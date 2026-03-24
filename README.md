@@ -121,8 +121,6 @@ Then set environment variables (or edit `application.yml`):
 ```bash
 export GOOGLE_CLIENT_ID=your-google-client-id
 export GOOGLE_CLIENT_SECRET=your-google-client-secret
-
-
 ---
 
 ## 📡 REST API Reference
