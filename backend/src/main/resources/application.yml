@@ -31,10 +31,10 @@ app:
     expiration-ms: 86400000
 
   cors:
-    allowed-origins: http://localhost:3000
+    allowed-origins: https://ecommerce-assignment-pied-eta.vercel.app
 
   oauth2:
-    authorized-redirect-uris: http://localhost:3000/oauth2/redirect
+    authorized-redirect-uris: https://ecommerce-assignment-pied-eta.vercel.app/oauth2/redirect
 
 logging:
   level:
