@@ -62,16 +62,29 @@ cd ecommerce-app
 
 ### 2. Start the Backend
 
-```bash
 cd backend
 mvn spring-boot:run
-```
 
-The backend starts on **http://localhost:8080**.
+Backend runs on:
 
-> **H2 Console** is available at http://localhost:8080/h2-console  
-> JDBC URL: `jdbc:h2:mem:ecommercedb` | User: `sa` | Password: *(empty)*
+http://localhost:8081
 
+Create database:
+
+CREATE DATABASE ecommerce;
+
+Update application.yml:
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/ecommerce
+    username: root
+    password: your_password
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
 #### Default seeded accounts
 
 | Username | Password   | Role       |
@@ -102,14 +115,6 @@ To enable SSO, register OAuth2 apps with each provider and add credentials:
 1. Go to [Google Cloud Console](https://console.cloud.google.com/) → APIs & Services → Credentials
 2. Create an OAuth 2.0 Client ID (Web Application)
 3. Add Authorized redirect URI: `http://localhost:8080/login/oauth2/code/google`
-
-### GitHub
-1. Go to GitHub → Settings → Developer settings → OAuth Apps → New OAuth App
-2. Authorization callback URL: `http://localhost:8080/login/oauth2/code/github`
-
-### Facebook
-1. Go to [Meta for Developers](https://developers.facebook.com/) → My Apps → Create App
-2. Add OAuth Redirect URI: `http://localhost:8080/login/oauth2/code/facebook`
 
 Then set environment variables (or edit `application.yml`):
 
