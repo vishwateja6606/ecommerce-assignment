@@ -56,10 +56,11 @@
 
     <!-- H2 In-Memory Database (swap for PostgreSQL in production) -->
 <!-- Source: https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+<!-- Source: https://mvnrepository.com/artifact/org.postgresql/postgresql -->
 <dependency>
-    <groupId>mysql</groupId>
-    <artifactId>mysql-connector-java</artifactId>
-    <version>8.0.33</version>
+    <groupId>org.postgresql</groupId>
+    <artifactId>postgresql</artifactId>
+    <version>42.7.8</version>
     <scope>compile</scope>
 </dependency>
 
